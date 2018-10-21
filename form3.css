@@ -1,0 +1,18 @@
+.section{
+	margin-top: 25px;
+}
+form{
+	margin-left: 500px;
+}
+table{
+    display: inline-block;
+    margin-left: 50px;
+}
+th,tbody{
+	padding: 10px;
+    text-align: center;
+    font-size: 22px;
+}
+.col{
+	cursor: pointer;
+}

@@ -1,0 +1,98 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	<title>Dynamicform</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="form3.css">
+</head>
+<body>
+ <div class="section">
+	<form style="float: left">
+		<div class="form-group">
+			<label for="name">Name :</label>
+			<input id="name" class="form-control" type="text" name="name">
+		</div>
+		<div class="form-group">
+			<label for="id">id :</label>
+			<input id="num" class="form-control" type="text" name="no">
+		</div>
+		<label for="psw">password :</label>
+		<div class="form-group">
+			<input id="psw" class="form-control" type="text" name="password">
+		</div>
+		<div class="form-group">
+			<button type="button" class="btn btn-info" onclick="perform()">Add</button>
+			<button type="button" class="btn btn-success" onclick="remove()">Remove</button>
+		</div>
+	</form>
+
+	<table id="tab" class="table-bordered">
+		<thead>
+			<tr>
+				<th>S.no</th>
+				<th>Name</th>
+				<th>id</th>
+				<th>password</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script>
+
+	<script>
+		var arr=[
+					{"name":"rishabh","id":11,"psw":"rishabh"},
+					{"name":"harsh","id":22,"psw":"harsh"},
+					{"name":"shrey","id":33,"psw":"shrey"}
+				];
+		function arrTable() {
+			var text='',i;	
+				for ( i in arr)
+				{	text +="<tr><td>" +i+"</td>"
+					text +="<td class='col'>" +arr[i]['name']+"</td>"
+					text +="<td class='col'>" +arr[i]['id']+"</td>"
+					text +="<td class='col'>" +arr[i]['psw']+"</td>"
+					text += "<td><button class=del>"+"delete"+"</button></td>"
+					text +="</tr>"
+				}
+			document.querySelectorAll('table')[0].tBodies[0].innerHTML=text;
+			};
+			arrTable();
+			
+		function perform(){	
+				var name=document.getElementById('name').value,
+					num=document.getElementById('num').value,
+					psw=document.getElementById('psw').value;
+					arr.push({name:name,id:num,psw:psw});
+					arrTable();
+		};
+		function remove(){
+			    document.getElementById('name').value='';
+				document.getElementById('num').value='';
+				document.getElementById('psw').value='';
+		};
+		$('table').on('click' ,'.del', function(){
+			var x=confirm('Are you sure');
+			if (x===true)
+			$(this).parents('tr').remove();
+		});
+		
+		$(document).ready(function(){
+			$('table').on('click','.col',function(event){
+				event.preventDefault();
+				document.getElementById('name').value= $(this).parent('tr').find('td:eq(1)').text();
+				document.getElementById('num').value= $(this).parent('tr').find('td:eq(2)'
+					).text();
+				document.getElementById('psw').value= $(this).parent('tr').find('td:eq(3)').text();
+			});
+		});
+	</script>
+
+</body>
+</html>
